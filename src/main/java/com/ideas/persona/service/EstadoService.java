@@ -1,5 +1,6 @@
 package com.ideas.persona.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -96,6 +97,18 @@ public class EstadoService implements IEstadoRepository{
 	@Override
 	public List<Estado> findAll() {
 		return estadoRepository.findAll();
+	}
+	
+	public List<Estado> findAllByCountry(int id){
+		List<Estado> estadosRespuesta = new ArrayList<>();
+		List<Estado> estados = estadoRepository.findAll();
+		for(int i=0; i<estados.size(); i++) {
+			if(estados.get(i).getPais().getId()==id) {
+				estadosRespuesta.add(estados.get(i));
+			}
+		}
+		return estadosRespuesta;
+		
 	}
 
 	@Override
