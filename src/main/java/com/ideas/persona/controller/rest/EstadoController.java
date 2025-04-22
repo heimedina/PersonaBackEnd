@@ -1,7 +1,6 @@
 package com.ideas.persona.controller.rest;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,14 +14,20 @@ import com.ideas.persona.service.EstadoService;
 @RestController
 @RequestMapping("/estado")
 public class EstadoController {
-	
+
 	@Autowired
 	private EstadoService estadoService;
-	
+
 	@GetMapping("/{id}")
-	private ResponseEntity<List<Estado>> getAllEstadosByCountry(@PathVariable("id") int idPais){
-		return ResponseEntity.ok(estadoService.findAllByCountry(idPais));
-		
+	private ResponseEntity<List<Estado>> getEstadoById(@PathVariable("id") int idEstado) {
+		List<Estado> respuesta = estadoService.findStatusById(idEstado);
+		return ResponseEntity.ok(respuesta);
+	}
+
+	@GetMapping("/pais/{id}")
+	private ResponseEntity<List<Estado>> getAllEstadosByCountry(@PathVariable("id") int idPais) {
+		List<Estado> respuesta = estadoService.findAllStatusByCountry(idPais);
+		return ResponseEntity.ok(respuesta);
 	}
 
 }
